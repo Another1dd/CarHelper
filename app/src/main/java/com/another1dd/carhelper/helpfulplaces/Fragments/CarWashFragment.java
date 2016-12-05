@@ -1,21 +1,24 @@
-package com.another1dd.carhelper.helpfulplaces;
+package com.another1dd.carhelper.helpfulplaces.Fragments;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.another1dd.carhelper.R;
+import com.another1dd.carhelper.helpfulplaces.CarWash;
+import com.another1dd.carhelper.helpfulplaces.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class CarWashFragment extends Fragment {
 
 
@@ -29,7 +32,9 @@ public class CarWashFragment extends Fragment {
                              Bundle savedInstanceState) {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(
                 R.layout.recycler_view, container, false);
-        ContentAdapter adapter = new ContentAdapter();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("CarWash");
+        ContentAdapter adapter = new ContentAdapter(myRef, CarWash.class);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
@@ -41,12 +46,14 @@ public class CarWashFragment extends Fragment {
         return recyclerView;
     }
 
-    public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
+    public static class ContentAdapter extends FirebaseRecyclerAdapter<ViewHolder, CarWash> {
         // Установим количество элементов списка в RecyclerView.
-        private static final int LENGTH = 18;
 
-        public ContentAdapter() {
+
+        public ContentAdapter(Query query, Class<CarWash> itemClass) {
+            super(query, itemClass);
         }
+
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -55,18 +62,42 @@ public class CarWashFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            // no-op
+            CarWash carWash = getItem(position);
+            holder.name.setText(carWash.getName());
+            holder.description.setText(carWash.getText());
         }
 
         @Override
-        public int getItemCount() {
-            return LENGTH;
+        protected void itemAdded(CarWash item, String key, int position) {
+
         }
+
+        @Override
+        protected void itemChanged(CarWash oldItem, CarWash newItem, String key, int position) {
+
+        }
+
+        @Override
+        protected void itemRemoved(CarWash item, String key, int position) {
+
+        }
+
+        @Override
+        protected void itemMoved(CarWash item, String key, int oldPosition, int newPosition) {
+
+        }
+
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        TextView description;
+
         public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.fragment_car_wash, parent, false));
+            name = (TextView) itemView.findViewById(R.id.card_title);
+            description = (TextView) itemView.findViewById(R.id.card_text);
         }
     }
 

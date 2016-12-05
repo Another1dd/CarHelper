@@ -14,17 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.another1dd.carhelper.helpfulplaces.AzsFragment;
-import com.another1dd.carhelper.helpfulplaces.CarWashFragment;
-import com.another1dd.carhelper.helpfulplaces.StoFragment;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.another1dd.carhelper.helpfulplaces.Fragments.CarWashFragment;
+import com.another1dd.carhelper.helpfulplaces.Fragments.FillingStationFragment;
+import com.another1dd.carhelper.helpfulplaces.Fragments.ServiceStationFragment;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Places extends Fragment {
 
     public  TabLayout tabLayout;
@@ -81,9 +75,9 @@ public class Places extends Fragment {
         public Fragment getItem(int position)
         {
             switch (position){
-                case 0 : return new AzsFragment();
+                case 0 : return new FillingStationFragment();
                 case 1 : return new CarWashFragment();
-                case 2 : return new StoFragment();
+                case 2 : return new ServiceStationFragment();
             }
             return null;
         }
@@ -113,50 +107,6 @@ public class Places extends Fragment {
             return null;
         }
     }
-    /*private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new AzsFragment(), "AZS");
-        adapter.addFragment(new CarWashFragment(), "Moiki");
-        adapter.addFragment(new StoFragment(), "STO");
-        viewPager.setAdapter(adapter);
-    }
 
- Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-
-    static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public Adapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }*/
 
 }
