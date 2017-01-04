@@ -1,17 +1,17 @@
-package com.another1dd.carhelper.helpfulplaces;
+package com.another1dd.carhelper.helpfulplaces.javaclasses;
 
-public class FillingStation {
+
+
+public class ServiceStation {
     public String name;
     public String text;
 
+    public ServiceStation(){}
 
-    public FillingStation(){}
-
-    public FillingStation(String name, String text)
+    public ServiceStation(String name, String text)
     {
         this.name = name;
         this.text = text;
-
     }
 
     public String getName() {
@@ -21,6 +21,4 @@ public class FillingStation {
     public String getText() {
         return text;
     }
-
-
 }

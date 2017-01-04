@@ -1,4 +1,4 @@
-package com.another1dd.carhelper.helpfulplaces;
+package com.another1dd.carhelper.helpfulplaces.javaclasses;
 
 
 public class CarWash {
