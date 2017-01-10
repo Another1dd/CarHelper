@@ -1,4 +1,4 @@
-package com.another1dd.carhelper.helpfulplaces.adapters;
+package com.another1dd.carhelper.places.adapters;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;

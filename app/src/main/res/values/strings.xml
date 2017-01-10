@@ -7,6 +7,7 @@
 
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
+    <string name="name">Name</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
     <string name="change_email">Change Email</string>
@@ -42,7 +43,7 @@
     <!-- Strings related to Settings -->
     <string name="acc_settings">Account</string>
     <string name="sing_out_key">Sing Out</string>
-    <string name="login_pls">Login to see your account name</string>
+    <string name="login_pls">Account name</string>
     <!-- Example General settings -->
 
 </resources>

@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
@@ -73,47 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mFragmentManager  = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.containerView, new Places()).commit();
-        /*
-        // Create Navigation drawer and inflate layout
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
-
-        mFragmentManager  = getSupportFragmentManager();
-        mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView, new Places()).commit();
-
-        // Adding menu icon to Toolbar
-
-
-        // Set behavior of Navigation drawer
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    // This method will trigger on item Click of navigation menu
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        mDrawerLayout.closeDrawers();
-
-                        if (menuItem.getItemId() == R.id.places){
-                            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.containerView, new Places()).commit();
-                        }
-
-                        if (menuItem.getItemId() == R.id.temp){
-                            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.containerView, new Temp()).commit();
-                        }
-
-
-                        menuItem.setChecked(true);
-                        // TODO: handle navigation
-
-
-                        return false;
-                    }
-                });
-
-        */
 
 
     }
@@ -182,11 +144,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+
     @Override
     protected void onStop() {
         super.onStop();
         if (authListener != null) {
             auth.removeAuthStateListener(authListener);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        auth.addAuthStateListener(authListener);
     }
 }

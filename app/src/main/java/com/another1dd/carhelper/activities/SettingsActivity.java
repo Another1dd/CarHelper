@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import com.another1dd.carhelper.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
@@ -94,12 +96,28 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             setHasOptionsMenu(true);
 
             final FirebaseAuth auth = FirebaseAuth.getInstance();
-            FirebaseUser user = auth.getCurrentUser();
-            String name = user.getEmail();
+            final FirebaseUser user = auth.getCurrentUser();
+            String name = "No user name";
+            if (user != null) {
+                name = user.getDisplayName();
+            }
 
 
-            final Preference prefAccName = findPreference("acc_name");
+
+            final EditTextPreference prefAccName = (EditTextPreference) findPreference("acc_name");
+
+
             prefAccName.setTitle(name);
+            prefAccName.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    prefAccName.setTitle(o.toString());
+                    assert user != null;
+                    user.updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(o.toString()).build());
+
+                    return false;
+                }
+            });
 
             Preference prefSingOut = findPreference("sing_out_key");
             prefSingOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -119,6 +137,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
         }
 
+
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
@@ -128,7 +147,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+
+
     }
+
 
 
 

@@ -1,13 +1,15 @@
-package com.another1dd.carhelper.helpfulplaces.javaclasses;
+package com.another1dd.carhelper.places.javaclasses;
 
 
-public class CarWash {
+
+public class ServiceStation {
     public String name;
     public String text;
 
-    public CarWash(){}
+    public ServiceStation(){}
 
-    public CarWash(String name, String text){
+    public ServiceStation(String name, String text)
+    {
         this.name = name;
         this.text = text;
     }

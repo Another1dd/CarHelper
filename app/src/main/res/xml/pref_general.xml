@@ -2,9 +2,9 @@
 
     <PreferenceCategory
         android:title="@string/acc_settings">
-        <Preference
+        <EditTextPreference
             android:key="acc_name"
-            android:title="@string/login_pls"/>
+            android:summary="@string/login_pls"/>
         <Preference
             android:key="sing_out_key"
             android:title="@string/sing_out_key"/>

@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.another1dd.carhelper.helpfulplaces.fragments.CarWashFragment;
-import com.another1dd.carhelper.helpfulplaces.fragments.FillingStationFragment;
-import com.another1dd.carhelper.helpfulplaces.fragments.ServiceStationFragment;
+import com.another1dd.carhelper.places.fragments.CarWashFragment;
+import com.another1dd.carhelper.places.fragments.FillingStationFragment;
+import com.another1dd.carhelper.places.fragments.ServiceStationFragment;
 
 
 public class Places extends Fragment {
